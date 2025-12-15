@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMEZIE DIVINE / WEB DEVELOPER</title>
+    <link rel="stylesheet" href="STYLE.css">
+</head>
+
+  <header>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- ================== HEADER / HERO ================== -->
+<header id="hero" style="position:relative; width:100%; height:100vh; color:#fff; overflow:hidden; z-index:9999;">
+  <!-- Background Image with Overlay -->
+  <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:url('https://via.placeholder.com/1920x1080.png?text=Your+Background+Image') center/cover no-repeat; filter:brightness(0.45); z-index:-3;"></div>
+  
+  <!-- Floating Neon Particles -->
+  <canvas id="hero-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:-2;"></canvas>
+
+  <!-- Navigation / Fixed Top -->
+  <div style="position:fixed; top:0; width:100%; background: rgba(0,0,0,0.25); backdrop-filter: blur(12px); z-index:9999; box-shadow:0 2px 12px rgba(0,0,0,0.3);">
+    <div style="max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:16px 24px;">
+      <!-- Logo -->
+      <h1 style="font-family:'Inter',sans-serif; font-weight:800; font-size:1.8rem; color:#00ffd5; letter-spacing:2px; display:flex; align-items:center; gap:10px;">
+        <span style="display:inline-block; width:12px; height:12px; background:#00aaff; border-radius:50%; animation:pulse 1.5s infinite;"></span>
+        Emezie Divine
+      </h1>
+      <!-- Nav Links -->
+      <nav>
+        <ul style="display:flex; gap:28px; list-style:none; margin:0; padding:0;">
+          <li><a href="#hero" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#personality" class="nav-link">Personality</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Content / Intro -->
+  <div style="height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 24px;">
+    <h2 style="font-size:3rem; color:#00ffd5; margin-bottom:16px; line-height:1.2;">We Create Highly Converting Websites</h2>
+    <p style="color:#cfeee8; font-size:1.2rem; max-width:720px; margin-bottom:32px;">I'm a professional web developer crafting modern, responsive, and high-performing websites for businesses and personal brands.</p>
+    <a href="#contact" style="padding:16px 32px; border-radius:12px; background:linear-gradient(90deg,#00ffd5,#00aaff); color:#fff; font-weight:600; font-size:1rem; text-decoration:none; transition:all 0.3s;">Get in Touch</a>
+  </div>
+</header>
+
+<style>
+  @keyframes pulse {
+    0%,100% { transform: scale(1); opacity:0.8; }
+    50% { transform: scale(1.3); opacity:1; }
+  }
+
+  /* Nav hover */
+  .nav-link {
+    color:#00ffd5;
+    font-weight:600;
+    transition: all 0.3s;
+  }
+  .nav-link:hover {
+    color:#ff4dd2;
+    transform:scale(1.05);
+  }
+
+  .nav-link.active {
+    color:#00aaff;
+    font-weight:700;
+  }
+
+  html {
+    scroll-behavior:smooth;
+  }
+
+  /* Responsive */
+  @media(max-width:768px){
+    h2 { font-size:2.2rem; }
+    p { font-size:1rem; }
+    nav ul { gap:16px; }
+    h1 { font-size:1.5rem; }
+  }
+</style>
+
+<script>
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section, #hero');
+  const navLinks = document.querySelectorAll('.nav-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      if(pageYOffset >= sectionTop) current = section.getAttribute('id');
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if(link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+
+  // ===================== Floating Neon Particles =====================
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let particlesArray = [];
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initParticles();
+  });
+
+  class Particle {
+    constructor(){
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 4 + 1;
+      this.speedX = (Math.random() - 0.5) * 1.5;
+      this.speedY = (Math.random() - 0.5) * 1.5;
+      this.color = `rgba(0,255,200,${Math.random()})`;
+    }
+    update(){
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if(this.x > canvas.width || this.x < 0) this.speedX *= -1;
+      if(this.y > canvas.height || this.y < 0) this.speedY *= -1;
+    }
+    draw(){
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function initParticles(){
+    particlesArray = [];
+    for(let i=0; i<80; i++){
+      particlesArray.push(new Particle());
+    }
+  }
+
+  function animateParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particlesArray.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animateParticles);
+  }
+
+  initParticles();
+  animateParticles();
+</script>
+
+<style>
+/* ================== HEADER NAV BUTTONS ================== */
+header nav a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #00ffd5;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,255,213,0.3);
+  box-shadow: 0 4px 12px rgba(0,255,213,0.15);
+  transition: all 0.35s cubic-bezier(.2,.9,.2,1);
+  z-index: 10;
+}
+
+/* Hover / Focus Effects */
+header nav a:hover,
+header nav a:focus {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 26px rgba(0,255,213,0.35);
+  color: #fff;
+}
+
+/* Active / Click */
+header nav a:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 10px rgba(0,255,213,0.25);
+}
+
+/* Animated gradient border on hover */
+header nav a::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  border-radius: 12px;
+  padding: 2px;
+  background: linear-gradient(45deg, #00ffd5, #00aaff, #ff4dd2);
+  opacity: 0;
+  transition: opacity 0.35s;
+  z-index: -1;
+}
+header nav a:hover::before {
+  opacity: 1;
+}
+
+/* Active section underline indicator */
+header nav a.active::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -6px;
+  height: 3px;
+  background: linear-gradient(90deg, #00ffd5, #00aaff, #ff4dd2);
+  border-radius: 2px;
+  transition: all 0.35s ease;
+}
+
+/* Responsive for smaller screens */
+@media (max-width:768px) {
+  header nav {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header nav a {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+}
+</style>
+
+<script>
+/* ================== ACTIVE NAV LINK ON SCROLL ================== */
+
+
+function updateActiveLink() {
+  let scrollPos = window.scrollY + 120; // Offset for header height
+  sections.forEach(section => {
+    if(scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight){
+      navLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = document.querySelector(`header nav a[href="#${section.id}"]`);
+      if(activeLink) activeLink.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', updateActiveLink);
+window.addEventListener('load', updateActiveLink);
+</script>
+
+
+</header>
+
+   <!-- body -->
+
+   <!-- ================== PROFESSIONAL PRELOADER ================== -->
+
+
+<div id="preloader">
+  <div class="preloader-content">
+    <h1>Welcome to <span>Emezie Divine Portfolio</span></h1>
+    <div class="preloader-logo"></div>
+    <div class="progress-ring">
+      <svg viewBox="0 0 120 120">
+        <circle class="progress-ring__circle" cx="60" cy="60" r="54"/>
+      </svg>
+      <div class="counter">0%</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Full-screen overlay */
+  #preloader {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: linear-gradient(135deg,#0b0e14,#10131f);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    z-index:99999;
+    overflow:hidden;
+  }
+
+  /* Welcome text */
+  #preloader h1 {
+    color:#00ffd5;
+    font-family:'Inter',sans-serif;
+    font-size:2.5rem;
+    letter-spacing:2px;
+    text-align:center;
+    margin-bottom:20px;
+  }
+  #preloader h1 span { color:#00aaff; }
+
+  /* Pulsing logo dot */
+  .preloader-logo {
+    width:24px; height:24px;
+    background:#00aaff;
+    border-radius:50%;
+    margin-bottom:24px;
+    animation:pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { transform: scale(1); opacity:0.8; }
+    50% { transform: scale(1.3); opacity:1; }
+  }
+
+  /* Progress ring */
+  .progress-ring {
+    position: relative;
+    width:120px; height:120px;
+  }
+  .progress-ring svg { transform: rotate(-90deg); width:100%; height:100%; }
+  .progress-ring__circle {
+    fill:transparent;
+    stroke: #00ffd5;
+    stroke-width:6;
+    stroke-linecap:round;
+    stroke-dasharray: 339.292; /* 2 * pi * r (r=54) */
+    stroke-dashoffset: 339.292;
+    transition: stroke-dashoffset 0.15s linear;
+  }
+  .progress-ring .counter {
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    color:#cfeee8;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:1.4rem;
+  }
+
+  /* Fade out */
+  #preloader.fade-out { animation: fadeOut 0.8s forwards; }
+  @keyframes fadeOut { to{opacity:0; visibility:hidden;} }
+</style>
+
+<script>
+  const radius = 54;
+  const circumference = 2 * Math.PI * radius;
+  let counter = 0;
+  const counterElement = document.querySelector('.progress-ring .counter');
+
+  function setProgress(percent){
+    const offset = circumference - percent/100 * circumference;
+    circle.style.strokeDashoffset = offset;
+  }
+
+  const interval = setInterval(()=>{
+    counter++;
+    if(counter>100){
+      clearInterval(interval);
+      document.getElementById('preloader').classList.add('fade-out');
+    } else {
+      counterElement.textContent = counter + '%';
+      setProgress(counter);
+    }
+  },15);
+
+  document.getElementById('preloader').addEventListener('animationend',()=>{
+    document.getElementById('preloader').style.display='none';
+  });
+</script>
+
+
+   <!-- ================= Dark/Light Mode Toggle ================= -->
+<div id="dark-mode-toggle" title="Toggle Dark/Light Mode" style="
+    position: fixed;
+    top: 22px;
+    right: 160px; /* leave space from WhatsApp button */
+    width: 60px;
+    height: 32px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #00ffd5, #00aaff);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    z-index: 9999;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    transition: all 0.4s ease;
+">
+    <div id="toggle-circle" style="
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #fff;
+        transition: all 0.4s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    "></div>
+</div>
+
+<script>
+
+// Initialize theme based on saved preference or system
+const savedTheme = localStorage.getItem('theme');
+if(savedTheme){
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if(savedTheme === 'light'){
+        circle.style.transform = 'translateX(28px)';
+    }
+} else {
+    // default dark
+    document.documentElement.setAttribute('data-theme', 'dark');
+}
+
+// Toggle function
+toggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if(currentTheme === 'dark'){
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme','light');
+        circle.style.transform = 'translateX(28px)';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme','dark');
+        circle.style.transform = 'translateX(0)';
+    }
+});
+</script>
+
+<style>
+/* ================== Theme Colors ================== */
+:root {
+    --bg-color: #0b0e14;
+    --text-color: #cfeee8;
+    --accent1: #00ffd5;
+    --accent2: #00aaff;
+    --accent3: #ff4dd2;
+    --card-bg: rgba(255,255,255,0.03);
+    --glass: rgba(0,255,200,0.14);
+}
+
+[data-theme="light"] {
+    --bg-color: #f0f0f5;
+    --text-color: #111;
+    --accent1: #00aaff;
+    --accent2: #00ffd5;
+    --accent3: #ff4dd2;
+    --card-bg: rgba(0,0,0,0.03);
+    --glass: rgba(255,255,255,0.2);
+}
+
+/* Body and general elements */
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.4s, color 0.4s;
+}
+
+/* Buttons and links inherit accent colors */
+button, a, .projects-btn, #scrollToTopBtn {
+    transition: background 0.4s, color 0.4s, border 0.4s;
+    color: var(--accent1);
+}
+button:hover, a:hover {
+    color: var(--accent3);
+}
+
+/* Cards and glass elements */
+.card, .project-card, .glass, header, footer {
+    background: var(--card-bg);
+    transition: background 0.4s, color 0.4s;
+}
+</style>
+
+
+
+
+<script>
+  const toggle = document.getElementById('dark-mode-toggle');
+  const circle = document.getElementById('toggle-circle');
+
+  // Check saved preference
+  if(localStorage.getItem('theme') === 'light'){
+      document.documentElement.setAttribute('data-theme', 'light');
+      circle.style.transform = 'translateX(28px)';
+  }
+
+  toggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if(currentTheme === 'light'){
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme','dark');
+          circle.style.transform = 'translateX(0)';
+      } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme','light');
+          circle.style.transform = 'translateX(28px)';
+      }
+  });
+</script>
+
+<style>
+  /* Dark / Light theme definitions */
+  :root {
+    --bg-color: #0b0e14;
+    --text-color: #cfeee8;
+    --accent1: #00ffd5;
+    --accent2: #00aaff;
+    --accent3: #ff4dd2;
+    --card-bg: rgba(255,255,255,0.03);
+    --glass: rgba(0,255,200,0.14);
+  }
+
+  [data-theme="light"] {
+    --bg-color: #f0f0f5;
+    --text-color: #111;
+    --accent1: #00aaff;
+    --accent2: #00ffd5;
+    --accent3: #ff4dd2;
+    --card-bg: rgba(0,0,0,0.03);
+    --glass: rgba(255,255,255,0.2);
+  }
+
+  body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.4s, color 0.4s;
+  }
+
+  header, footer, .card, .project-card, .projects-btn, #scrollToTopBtn {
+    transition: background 0.4s, color 0.4s, border 0.4s;
+  }
+
+  a, button {
+    color: var(--accent1);
+  }
+
+  a:hover, button:hover {
+    color: var(--accent3);
+  }
+
+  /* Optional: for glass effect */
+  .glass {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+  }
+</style>
+
+
+   <!-- ================== FEATURED WORK CAROUSEL ================== -->
+<section id="showcase" style="padding:60px 24px; background:linear-gradient(180deg,#10131f 0%,#0b0e14 100%);">
+  <h2 style="color:#00ffd5; text-align:center; font-size:2.4rem; margin-bottom:32px; text-transform:uppercase; letter-spacing:1.5px;">Featured Work</h2>
+
+  <div class="carousel-container">
+    <!-- Image Cards -->
+    <div class="carousel-card">
+      <img src="image10.jpg" alt="Project 1">
+    </div>
+    <div class="carousel-card">
+      <img src="image11.jpg" alt="Project 2">
+    </div>
+    <div class="carousel-card">
+      <img src="images 12.jpg" alt="Project 3">
+    </div>
+    <div class="carousel-card">
+      <img src="images13.jpg" alt="Project 4">
+    </div>
+    <div class="carousel-card">
+      <img src="image14.jpg" alt="Project 5">
+    </div>
+    <!-- Repeat first cards for infinite scroll effect -->
+    <div class="carousel-card">
+      <img src="image15.jpg" alt="Project 1">
+    </div>
+    <div class="carousel-card">
+      <img src="image16.jpg" alt="Project 2">
+    </div>
+  </div>
+</section>
+
+<style>
+  .carousel-container {
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    cursor:grab;
+    padding-bottom:20px;
+    animation: scroll-left 30s linear infinite;
+  }
+
+  .carousel-card {
+    flex: 0 0 auto;
+    border-radius:16px;
+    overflow:hidden;
+    width:300px;
+    transition: transform 0.4s, box-shadow 0.4s;
+    position:relative;
+    box-shadow: 0 6px 18px rgba(0,255,213,0.15);
+    scroll-snap-align:center;
+  }
+
+  .carousel-card img {
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    display:block;
+    transition: transform 0.5s ease;
+  }
+
+  .carousel-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    z-index:5;
+    box-shadow:0 12px 28px rgba(0,255,213,0.3);
+    animation-play-state: paused;
+  }
+
+  .carousel-card:hover img {
+    transform: scale(1.1);
+  }
+
+  /* Scroll snapping */
+  .carousel-container {
+    scroll-snap-type:x mandatory;
+  }
+
+  /* Scrollbar styling */
+  .carousel-container::-webkit-scrollbar {
+    height:8px;
+  }
+  .carousel-container::-webkit-scrollbar-thumb {
+    background:#00ffd5;
+    border-radius:4px;
+  }
+  .carousel-container::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* Auto scroll animation */
+  @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Pause animation on hover */
+  .carousel-container:hover {
+    animation-play-state: paused;
+  }
+
+  @media(max-width:768px){
+    .carousel-card { width:220px; }
+    .carousel-card img { height:150px; }
+  }
+</style>
+
+<script>
+  // Drag-to-scroll support
+  const carousel = document.querySelector('.carousel-container');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  carousel.addEventListener('mousedown', (e) => {
+    isDown = true;
+    carousel.classList.add('active');
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+    carousel.style.animationPlayState = 'paused'; // pause auto-scroll while dragging
+  });
+  carousel.addEventListener('mouseleave', () => {
+    isDown = false;
+    carousel.classList.remove('active');
+    carousel.style.animationPlayState = 'running';
+  });
+  carousel.addEventListener('mouseup', () => {
+    isDown = false;
+    carousel.classList.remove('active');
+    carousel.style.animationPlayState = 'running';
+  });
+  carousel.addEventListener('mousemove', (e) => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 2; // scroll speed
+    carousel.scrollLeft = scrollLeft - walk;
+  });
+</script>
+
+    <body class="BODY1">
+   <!-- WhatsApp Floating Button -->
+<a href="#" id="waBtn" class="wa-floating-btn">
+  <i class="fab fa-whatsapp"></i>
+  <span class="wa-text">Happy to chat on WhatsApp</span>
+</a>
+
+<!-- Tooltip -->
+<div id="waTooltip" class="wa-tooltip">Chat now</div>
+
+<!-- Slide-out WhatsApp Chat Panel -->
+<div id="waPanel" class="wa-panel">
+  <div class="wa-panel-header">
+    <i class="fab fa-whatsapp"></i>
+    <span>WhatsApp Chat</span>
+    <button id="waClose" class="wa-close">&times;</button>
+  </div>
+  <div class="wa-panel-body">
+    <div class="wa-bubble">Hi 👋<br>How can I help you today?</div>
+    <textarea id="waMessage" placeholder="Type your message here..." rows="3"></textarea>
+    <a href="#" id="waSend" class="wa-chat-btn">
+      <i class="fab fa-whatsapp"></i> Send Message
+    </a>
+  </div>
+</div>
+
+     <!-- ABOUT ME  -->
+
+      <!-- ================== ABOUT ME SECTION ================== -->
+<section id="about" style="padding:100px 24px; background:linear-gradient(180deg,#0b0e14 0%,#10131f 100%); color:#cfeee8;">
+  <div class="about-container" style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+
+    <!-- Left: Image -->
+    <div class="about-image" style="text-align:center;">
+      <img src="image17jpg.jpg" alt="Profile Photo" style="border-radius:20px; max-width:100%; box-shadow: 0 12px 36px rgba(0,255,200,0.2); transition: transform 0.35s ease;">
+    </div>
+
+    <!-- Right: Text -->
+    <div class="about-text" style="text-align:left;">
+      <h2 class="animated-title" style="font-size:2.6rem; color:#00ffd5; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:16px;">About Me</h2>
+      <p style="font-size:1.1rem; line-height:1.6; color:#9eeadf; margin-bottom:20px;">
+        Hi! I’m <strong>Emezie divine</strong>, a passionate <strong>Web Developer</strong> creating modern, responsive, and high-performance websites. I specialize in turning ideas into fully functional websites that drive results.
+      </p>
+      <p style="font-size:1.05rem; line-height:1.6; color:#9eeadf; margin-bottom:24px;">
+        I focus on <strong>clean code</strong>, <strong>pixel-perfect design</strong>, and <strong>smooth user experience</strong>. Whether it’s a portfolio, e-commerce site, or web application, I build solutions that impress and perform.
+      </p>
+
+      <!-- Animated Counters -->
+      <div class="counters" style="display:flex; gap:32px; flex-wrap:wrap; margin-bottom:32px;">
+        <div class="counter-item">
+          <h3 class="counter" data-target="20" style="color:#00ffd5; font-size:2rem; margin-bottom:6px;">0</h3>
+          <p style="color:#9eeadf; font-size:0.95rem;">Projects Completed</p>
+        </div>
+        <div class="counter-item">
+          <h3 class="counter" data-target="10" style="color:#00aaff; font-size:2rem; margin-bottom:6px;">0</h3>
+          <p style="color:#9eeadf; font-size:0.95rem;">Happy Clients</p>
+        </div>
+        <div class="counter-item">
+          <h3 class="counter" data-target="3" style="color:#ff4dd2; font-size:2rem; margin-bottom:6px;">0</h3>
+          <p style="color:#9eeadf; font-size:0.95rem;">Years of Experience</p>
+        </div>
+      </div>
+
+      <!-- Circular Skill Bars -->
+      <div class="skills-circles" style="display:flex; gap:24px; flex-wrap:wrap; margin-bottom:32px; justify-content:start;">
+        <div class="circle-skill" data-percentage="95">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" stroke="#222" stroke-width="10" fill="none"></circle>
+            <circle cx="50" cy="50" r="45" stroke="#00ffd5" stroke-width="10" fill="none" stroke-dasharray="282.6" stroke-dashoffset="282.6"></circle>
+            <text x="50" y="55" text-anchor="middle" fill="#00ffd5" font-size="14" font-weight="600">HTML</text>
+          </svg>
+        </div>
+        <div class="circle-skill" data-percentage="90">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" stroke="#222" stroke-width="10" fill="none"></circle>
+            <circle cx="50" cy="50" r="45" stroke="#00aaff" stroke-width="10" fill="none" stroke-dasharray="282.6" stroke-dashoffset="282.6"></circle>
+            <text x="50" y="55" text-anchor="middle" fill="#00aaff" font-size="14" font-weight="600">CSS</text>
+          </svg>
+        </div>
+        <div class="circle-skill" data-percentage="85">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" stroke="#222" stroke-width="10" fill="none"></circle>
+            <circle cx="50" cy="50" r="45" stroke="#ff4dd2" stroke-width="10" fill="none" stroke-dasharray="282.6" stroke-dashoffset="282.6"></circle>
+            <text x="50" y="55" text-anchor="middle" fill="#ff4dd2" font-size="14" font-weight="600">JS</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <a href="#contact" style="display:inline-block; padding:14px 32px; border-radius:16px; background:linear-gradient(90deg,#00ffd5,#00aaff); color:#fff; font-weight:600; text-decoration:none; transition: all 0.35s;">
+        Let's Work Together
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MY PERSONALITY -->
+
+<!-- ================== MY PERSONALITY SECTION ================== -->
+<section id="personality" style="padding:100px 24px; background:linear-gradient(180deg,#10131f 0%,#121624 100%); color:#cfeee8; text-align:center;">
+  <h2 style="font-size:2.6rem; color:#00ffd5; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:24px;">My Personality</h2>
+  <p style="max-width:720px; margin:0 auto 40px; font-size:1.1rem; color:#9eeadf; line-height:1.6;">
+    I’m a creative and detail-oriented web developer who loves crafting engaging user experiences. Curious by nature, I explore new technologies and always strive to deliver high-quality, impactful solutions for clients.
+  </p>
+
+  <!-- Personality Traits -->
+  <div class="personality-traits" style="display:flex; flex-wrap:wrap; gap:24px; justify-content:center; margin-bottom:40px;">
+    <div class="trait" style="background:rgba(0,255,200,0.1); padding:16px 24px; border-radius:14px; font-weight:600; color:#00ffd5; transition: all 0.3s; cursor:default;">
+      ⚡ Creative
+    </div>
+    <div class="trait" style="background:rgba(0,255,200,0.1); padding:16px 24px; border-radius:14px; font-weight:600; color:#00aaff; transition: all 0.3s; cursor:default;">
+      🛠️ Problem Solver
+    </div>
+    <div class="trait" style="background:rgba(0,255,200,0.1); padding:16px 24px; border-radius:14px; font-weight:600; color:#ff4dd2; transition: all 0.3s; cursor:default;">
+      💡 Innovative
+    </div>
+    <div class="trait" style="background:rgba(0,255,200,0.1); padding:16px 24px; border-radius:14px; font-weight:600; color:#00ffd5; transition: all 0.3s; cursor:default;">
+      🤝 Team Player
+    </div>
+    <div class="trait" style="background:rgba(0,255,200,0.1); padding:16px 24px; border-radius:14px; font-weight:600; color:#00aaff; transition: all 0.3s; cursor:default;">
+      🕵️ Curious
+    </div>
+  </div>
+
+  <!-- Quote or Motto -->
+  <blockquote style="font-size:1.2rem; color:#9eeadf; font-style:italic; max-width:600px; margin:0 auto; border-left:3px solid #00ffd5; padding-left:18px;">
+    "Code with purpose. Design with passion."
+  </blockquote>
+</section>
+
+
+<!-- ================== PROFESSIONAL PROJECTS SECTION WITH ANIMATED BORDER ================== -->
+<section id="projects">
+  <h2>My Projects</h2>
+  <p>Explore my work. Hover over a project to see details. Recent projects are also included.</p>
+
+  <!-- Main Projects Button -->
+  <button class="projects-btn">My Projects</button>
+
+  <!-- Projects Grid -->
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="gradient-border"></div>
+      <img src="image15.jpg" alt="Project 1">
+      <div class="project-card-content">
+        <h3>Portfolio Website</h3>
+        <p>A personal portfolio website built with HTML, CSS, and JS showcasing my skills and projects.</p>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="gradient-border"></div>
+      <img src="image16.jpg" alt="Project 2">
+      <div class="project-card-content">
+        <h3>E-commerce App</h3>
+        <p>A full-stack e-commerce application built with React, Node.js, and MongoDB.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Projects -->
+  <div class="recent-projects">
+    <h3>Recent Projects</h3>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="gradient-border"></div>
+        <img src="image14.jpg" alt="Recent 1">
+        <div class="project-card-content">
+          <h3>Chat App</h3>
+          <p>A real-time chat application built with React and Socket.io.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="gradient-border"></div>
+        <img src="image17jpg.jpg" alt="Recent 2">
+        <div class="project-card-content">
+          <h3>Task Manager</h3>
+          <p>A productivity app built with Vue.js and Firebase for task tracking.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Projects Section Base Styles */
+  #projects {
+    padding: 120px 24px 80px;
+    text-align: center;
+    background: linear-gradient(180deg,#0b0e14 0%,#10131f 100%);
+    color: #9eeadf;
+  }
+
+  #projects h2 {
+    font-size: 2.6rem;
+    color: #00ffd5;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+
+  #projects p {
+    font-size: 1.1rem;
+    max-width: 720px;
+    margin: 0 auto 48px;
+  }
+
+  .projects-btn {
+    padding: 20px 36px;
+    border-radius: 16px;
+    border: none;
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(12px);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #00ffd5;
+    cursor: pointer;
+    transition: all 0.35s;
+    margin-bottom: 48px;
+  }
+
+  .projects-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 28px rgba(0,255,200,0.4);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 28px;
+    justify-items: center;
+  }
+
+  .project-card {
+    position: relative;
+    background: rgba(255,255,255,0.03);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 320px;
+    overflow: hidden;
+    transition: transform 0.35s, box-shadow 0.35s;
+    cursor: pointer;
+  }
+
+  .project-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-card-content {
+    padding: 18px;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-card h3 {
+    color: #00ffd5;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+
+  .gradient-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(270deg, #00ffd5, #00aaff, #ff4dd2, #00ffd5);
+    background-size: 600% 600%;
+    z-index: 0;
+    pointer-events: none;
+    animation: rainbowBorder 6s linear infinite;
+  }
+
+  @keyframes rainbowBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 16px 48px rgba(0,255,200,0.4), 0 0 36px rgba(255,77,210,0.3);
+  }
+
+  .project-card:hover .gradient-border {
+    filter: blur(4px);
+  }
+
+  .recent-projects h3 {
+    color: #00aaff;
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+  }
+
+  /* Responsive */
+  @media (max-width: 420px) {
+    #projects {
+      padding: 80px 16px 60px;
+    }
+
+    .projects-btn {
+      padding: 16px 28px;
+      font-size: 1rem;
+    }
+  }
+</style>
+
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Skills - Professional Portfolio</title>
+<style>
+  /* -------- Reset & Base -------- */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0b0e14; color: #fff; }
+
+  /* -------- Section Container -------- */
+  #skills {
+    padding: 80px 24px;
+    text-align: center;
+    background: linear-gradient(180deg, #0b0e14 0%, #10131f 100%);
+  }
+  #skills h2 {
+    font-size: 2.6rem;
+    margin-bottom: 16px;
+    color: #00ffd5;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  #skills p {
+    color: #9eeadf;
+    font-size: 1.1rem;
+    max-width: 720px;
+    margin: 0 auto 48px;
+  }
+
+  /* -------- Skills Grid -------- */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 28px;
+    justify-items: center;
+  }
+
+  /* -------- Skill Button with Circle -------- */
+  .skill-btn-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+
+  .skill-btn-wrapper svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 120px;
+    height: 120px;
+    transform: rotate(-90deg);
+  }
+
+  .skill-btn-wrapper circle {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+  }
+
+  .skill-btn-wrapper .bg-circle {
+    stroke: rgba(255,255,255,0.06);
+  }
+
+  .skill-btn-wrapper .progress-circle {
+    stroke: url(#grad);
+    stroke-dasharray: 339.292; /* 2π * 54 */
+    stroke-dashoffset: 339.292;
+    transition: stroke-dashoffset 1.2s ease;
+    filter: drop-shadow(0 0 10px rgba(0,255,200,0.3));
+  }
+
+  .skill-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #00ffd5;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s cubic-bezier(.2,.9,.2,1);
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .skill-btn span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .skill-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,#00ffd5,#00aaff,#ff4dd2,#ffb600);
+    filter: blur(28px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .skill-btn:hover::before { opacity: 0.6; }
+  .skill-btn:hover { transform: translate(-50%, -50%) scale(1.06); }
+  .skill-btn:active { transform: translate(-50%, -50%) scale(0.92); }
+
+  /* -------- Responsive -------- */
+  @media(max-width:480px){
+    .skill-btn-wrapper { width: 100px; height: 100px; }
+    .skill-btn-wrapper svg { width: 100px; height: 100px; }
+    .skill-btn { width: 72px; height: 72px; font-size: 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<section id="skills">
+  <h2>My Skills</h2>
+  <p>These are my core coding skills. Each skill shows proficiency level as a circular progress meter.</p>
+
+  <div class="skills-grid">
+    <!-- Skill Example -->
+    <div class="skill-btn-wrapper" data-progress="0.9">
+      <svg viewBox="0 0 120 120">
+        <defs>
+          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00ffd5"/>
+            <stop offset="40%" stop-color="#00aaff"/>
+            <stop offset="70%" stop-color="#ff4dd2"/>
+          </linearGradient>
+        </defs>
+        <circle class="bg-circle" cx="60" cy="60" r="54"/>
+        <circle class="progress-circle" cx="60" cy="60" r="54"/>
+      </svg>
+      <button class="skill-btn"><span>HTML</span></button>
+    </div>
+
+    <div class="skill-btn-wrapper" data-progress="0.85">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg-circle" cx="60" cy="60" r="54"/>
+        <circle class="progress-circle" cx="60" cy="60" r="54"/>
+      </svg>
+      <button class="skill-btn"><span>CSS</span></button>
+    </div>
+
+    <div class="skill-btn-wrapper" data-progress="0.8">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg-circle" cx="60" cy="60" r="54"/>
+        <circle class="progress-circle" cx="60" cy="60" r="54"/>
+      </svg>
+      <button class="skill-btn"><span>JavaScript</span></button>
+    </div>
+
+    <div class="skill-btn-wrapper" data-progress="0.75">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg-circle" cx="60" cy="60" r="54"/>
+        <circle class="progress-circle" cx="60" cy="60" r="54"/>
+      </svg>
+      <button class="skill-btn"><span>React</span></button>
+    </div>
+
+    <div class="skill-btn-wrapper" data-progress="0.7">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg-circle" cx="60" cy="60" r="54"/>
+        <circle class="progress-circle" cx="60" cy="60" r="54"/>
+      </svg>
+      <button class="skill-btn"><span>Node.js</span></button>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animate progress circles when visible
+  function animateSkills() {
+    const skills = document.querySelectorAll('.skill-btn-wrapper');
+    skills.forEach(skill => {
+      const progressCircle = skill.querySelector('.progress-circle');
+      const radius = 54;
+      const circumference = 2 * Math.PI * radius;
+      const progress = parseFloat(skill.getAttribute('data-progress')); // 0-1
+
+      progressCircle.style.strokeDasharray = circumference;
+      progressCircle.style.strokeDashoffset = circumference;
+
+      // Animate only if in viewport
+      const rect = skill.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 60) {
+        const offset = circumference * (1 - progress);
+        progressCircle.style.strokeDashoffset = offset;
+      }
+    });
+  }
+
+  window.addEventListener('scroll', animateSkills);
+  window.addEventListener('load', animateSkills);
+  window.addEventListener('resize', animateSkills);
+</script>
+
+</body>
+</html>
+
+<!-- ================== STATIC PROFESSIONAL CONTACT SECTION ================== -->
+<section id="contact" style="padding:120px 24px 80px; text-align:center; background:linear-gradient(180deg,#0b0e14 0%,#10131f 100%); color:#9eeadf;">
+  <h2 style="font-size:2.6rem; color:#00ffd5; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:16px;">Contact Me</h2>
+  <p style="font-size:1.1rem; max-width:720px; margin:0 auto 48px;">Have a project or idea? Reach out via form, email, or WhatsApp directly!</p>
+
+  <div class="contact-form-container animated-form">
+    <h3 style="color:#00ffd5; font-size:1.8rem; margin-bottom:24px;">Get in Touch</h3>
+    <form id="contactForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Youremail@gmail.com" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Write your message here..." rows="6" required></textarea>
+
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+
+    <div class="contact-links">
+      <p>Or contact me directly:</p>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=emeziedivine0@gmail.com" target="_blank" class="contact-link">📧 Email Me</a>
+      <a href="https://wa.me/9110995651" target="_blank" class="contact-link">💬 WhatsApp Me</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ================== Contact Form Container ================== */
+  .contact-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 36px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 8px 32px rgba(0,255,200,0.3), 0 0 48px rgba(0,160,255,0.2);
+    position: relative;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  /* Floating/Pulse/Bounce Animation */
+  .animated-form {
+    animation: floatY 3s ease-in-out infinite,
+               pulseGlow 2.8s ease-in-out infinite,
+               subtleBounce 3.6s ease-in-out infinite;
+  }
+
+  @keyframes floatY {
+    0%{ transform: translateY(0) scale(1); }
+    50%{ transform: translateY(-6px) scale(1.01); }
+    100%{ transform: translateY(0) scale(1); }
+  }
+
+  @keyframes subtleBounce {
+    0%{ transform: translateY(0) scale(1); }
+    35%{ transform: translateY(-4px) scale(1.02); }
+    60%{ transform: translateY(2px) scale(.99); }
+    100%{ transform: translateY(0) scale(1); }
+  }
+
+  @keyframes pulseGlow {
+    0%{ box-shadow: 0 6px 20px rgba(0,255,200,0.14); }
+    50%{ box-shadow: 0 12px 38px rgba(0,170,255,0.22); }
+    100%{ box-shadow: 0 6px 20px rgba(0,255,200,0.14); }
+  }
+
+  .contact-form-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 6px;
+    color: #9eeadf;
+    font-weight: 500;
+  }
+
+  .contact-form-container input,
+  .contact-form-container textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.02);
+    color: #fff;
+    margin-bottom: 18px;
+    font-size: 1rem;
+    resize: none;
+    transition: all 0.3s;
+  }
+
+  .contact-form-container input:focus,
+  .contact-form-container textarea:focus {
+    outline: none;
+    border-color: #00ffd5;
+    box-shadow: 0 0 18px rgba(0,255,200,0.6);
+  }
+
+  /* Animated Rainbow Submit Button */
+  .submit-btn {
+    padding: 14px 32px;
+    border-radius: 16px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    background: linear-gradient(270deg, #00ffd5, #00aaff, #ff4dd2, #00ffd5);
+    background-size: 600% 600%;
+    color: #fff;
+    animation: rainbowBtn 4s linear infinite, pulseBtn 2.8s ease-in-out infinite;
+    box-shadow: 0 0 14px rgba(0,255,200,0.3);
+    transition: all 0.3s;
+  }
+
+  .submit-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 28px rgba(0,255,200,0.7), 0 0 48px rgba(0,160,255,0.5);
+  }
+
+  @keyframes rainbowBtn {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes pulseBtn {
+    0%{ box-shadow: 0 0 14px rgba(0,255,200,0.3); }
+    50%{ box-shadow: 0 0 28px rgba(0,255,200,0.7); }
+    100%{ box-shadow: 0 0 14px rgba(0,255,200,0.3); }
+  }
+
+  /* Contact Links */
+  .contact-links {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .contact-link {
+    color: #00aaff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .contact-link:hover {
+    color: #00ffd5;
+    text-shadow: 0 0 8px #00ffd5;
+  }
+
+  @media (max-width: 480px) {
+    .contact-form-container {
+      padding: 24px;
+    }
+    .submit-btn {
+      padding: 12px 24px;
+    }
+  }
+</style>
+ 
+<!-- javaScript -->
+
+<script>
+const waBtn = document.getElementById("waBtn");
+const waPanel = document.getElementById("waPanel");
+const waClose = document.getElementById("waClose");
+const waTooltip = document.getElementById("waTooltip");
+const waSend = document.getElementById("waSend");
+const waMessage = document.getElementById("waMessage");
+
+// Shrink button on scroll
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 150) {
+    waBtn.classList.add("shrink");
+  } else {
+    waBtn.classList.remove("shrink");
+  }
+});
+
+// Tooltip
+setTimeout(() => waTooltip.classList.add("show"), 800);
+setTimeout(() => waTooltip.classList.remove("show"), 3000);
+
+// Open panel
+waBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  waPanel.classList.add("open");
+  waTooltip.classList.remove("show");
+});
+
+// Close panel
+waClose.addEventListener("click", () => waPanel.classList.remove("open"));
+
+// Send message
+waSend.addEventListener("click", () => {
+  const text = encodeURIComponent(waMessage.value || "Hi, I need assistance!");
+  const number = "9110995651"; // <-- Replace with your WhatsApp number (international format)
+  window.open(`https://wa.me/${number}?text=${text}`, "_blank");
+});
+
+// ABOUT ME
+
+// Counter Animation
+const counters = document.querySelectorAll('.counter');
+counters.forEach(counter => {
+  const updateCount = () => {
+    const target = +counter.getAttribute('data-target');
+    const count = +counter.innerText;
+    const increment = target / 100;
+    if(count < target) {
+      counter.innerText = Math.ceil(count + increment);
+      setTimeout(updateCount, 20);
+    } else {
+      counter.innerText = target;
+    }
+  };
+  updateCount();
+});
+
+// Circular Skills Animation
+const skills = document.querySelectorAll('.circle-skill');
+skills.forEach(skill => {
+  const circle = skill.querySelectorAll('circle')[1];
+  const percentage = skill.getAttribute('data-percentage');
+  const radius = circle.r.baseVal.value;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (percentage / 100 * circumference);
+  setTimeout(()=> circle.style.strokeDashoffset = offset, 300);
+});
+
+</script>
+
+
+
+<!-- PROFESSIONAL FOOTER -->
+
+<!-- ================== FOOTER ================== -->
+<footer style="background:linear-gradient(180deg,#0b0e14 0%,#10131f 100%); color:#cfeee8; padding:80px 24px; position:relative; z-index:100;">
+  <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:32px; align-items:start;">
+
+    <!-- Brand / Logo -->
+    <div>
+      <h1 style="font-family:'Inter',sans-serif; font-weight:800; font-size:2rem; color:#00ffd5; letter-spacing:2px; display:flex; align-items:center; gap:10px;">
+        <span style="display:inline-block; width:12px; height:12px; background:#00aaff; border-radius:50%; animation:pulse 1.5s infinite;"></span>
+        Emezie Divine
+      </h1>
+      <p style="color:#9eeadf; font-size:0.95rem; line-height:1.6;">Web Developer | Frontend & Backend | Crafting modern, responsive websites with care and precision.</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 style="color:#00aaff; font-size:1.2rem; margin-bottom:12px;">Quick Links</h3>
+      <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+        <li><a href="#about" class="footer-link">About Me</a></li>
+        <li><a href="#skills" class="footer-link">Skills</a></li>
+        <li><a href="#projects" class="footer-link">Projects</a></li>
+        <li><a href="#personality" class="footer-link">Personality</a></li>
+        <li><a href="#contact" class="footer-link">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div>
+      <h3 style="color:#00aaff; font-size:1.2rem; margin-bottom:12px;">Contact</h3>
+      <p style="color:#cfeee8; font-size:0.95rem; margin-bottom:6px;">Email: <a href="mailto:emeziedivine0@gmail.com" style="color:#00ffd5;">emeziedivine0@gmail.com</a></p>
+      <p style="color:#cfeee8; font-size:0.95rem; margin-bottom:6px;">Phone: <a href="tel:+2349110995651" style="color:#00ffd5;">+2349110995651</a></p>
+      <p style="color:#cfeee8; font-size:0.95rem;">WhatsApp: <a href="https://wa.me/9110995651" target="_blank" style="color:#00ffd5;">Message Me</a></p>
+    </div>
+
+    <!-- Newsletter Signup -->
+    <div>
+      <h3 style="color:#00aaff; font-size:1.2rem; margin-bottom:12px;">Newsletter</h3>
+      <p style="color:#cfeee8; font-size:0.95rem; margin-bottom:12px;">Subscribe for updates and new project releases.</p>
+      <form id="newsletter-form" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <input type="email" id="newsletter-email" placeholder="Your email" required
+               style="padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.02); color:#cfeee8; flex:1; min-width:180px;">
+        <button type="submit" style="padding:10px 20px; border:none; border-radius:12px; background:linear-gradient(90deg,#00ffd5,#00aaff); color:#fff; font-weight:600; cursor:pointer; transition: all 0.3s;">Subscribe</button>
+      </form>
+      <p id="newsletter-feedback" style="margin-top:8px; font-size:0.85rem; color:#00ffd5; display:none;">Subscribed successfully!</p>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div style="text-align:center; margin-top:50px; font-size:0.85rem; color:#9eeadf;">
+    &copy; <span id="year"></span> Emezie Divine. All rights reserved.
+  </div>
+</footer>
+
+
+<style>
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 1; }
+  }
+
+  footer a.footer-link:hover {
+    color:#ff4dd2;
+    transition:0.3s;
+  }
+
+  footer a:hover {
+    transition:0.3s;
+  }
+
+  #whatsapp-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media(max-width:768px){
+    footer div { text-align:center; }
+    #whatsapp-btn { top:80px; right:14px; }
+  }
+</style>
+
+<script>
+  // Auto-update year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Newsletter form validation & feedback
+  const newsletterForm = document.getElementById('newsletter-form');
+  const newsletterEmail = document.getElementById('newsletter-email');
+  const feedback = document.getElementById('newsletter-feedback');
+
+  newsletterForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(newsletterEmail.value.trim() !== ''){
+      feedback.style.display = 'block';
+      feedback.textContent = 'Subscribed successfully!';
+      newsletterEmail.value = '';
+      setTimeout(()=>feedback.style.display='none',3000);
+    } else {
+      feedback.style.display = 'block';
+      feedback.textContent = 'Please enter a valid email.';
+      setTimeout(()=>feedback.style.display='none',3000);
+    }
+  });
+</script>
+
+
+
+
+<!-- FontAwesome Tcons -->
+
+<script
+src="https://kit.fontawesome.com/a076d05399.js"
+crossorigin="anonymous"></script>
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Professional Scroll-To-Top (All-in-One)</title>
+
+<style>
+  /* -------------------------
+     Page (demo content)
+     ------------------------- */
+  :root{
+    --accent1: #00ffd5;
+    --accent2: #00aaff;
+    --accent3: #ff4dd2;
+    --glass: rgba(0,255,200,0.14);
+    --glass-strong: rgba(0,255,200,0.22);
+  }
+
+  
+  h1{font-size:2.1rem; margin:0 0 8px;}
+  p.lead{max-width:720px; color:#9eeadf; line-height:1.6}
+  .demo-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-top:28px}
+  .card{background:rgba(255,255,255,0.03); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
+  /* -------------------------
+     Scroll control container
+     ------------------------- */
+  #scrollWrap{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:92px;
+    height:92px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:999999;
+    pointer-events:none; /* let the children decide */
+  }
+
+  /* progress svg fits container */
+  .progress-ring{
+    position:absolute;
+    width:92px; height:92px;
+    transform:rotate(-90deg); /* so 0% starts at top */
+    pointer-events:none;
+  }
+
+  /* The rainbow stroke: animated via JS by changing stroke-dashoffset */
+  .progress-ring__circle{
+    stroke-linecap:round;
+    fill:transparent;
+    stroke-width:6;
+    stroke: url(#grad); /* fallback; gradient defined in SVG */
+    transition: stroke-dashoffset 0.2s linear;
+    filter: drop-shadow(0 0 8px rgba(0,255,200,0.18));
+    transform-origin:center;
+  }
+
+  /* The circular button */
+  #scrollToTopBtn{
+    width:68px;
+    height:68px;
+    border-radius:50%;
+    border:0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 26px rgba(0,255,200,0.10);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    pointer-events:auto;
+    transform: translateY(18px) scale(0.9);
+    opacity:0;
+    visibility:hidden;
+    transition: all 0.45s cubic-bezier(.2,.9,.2,1);
+    will-change: transform, opacity, box-shadow;
+  }
+
+  /* Arrow SVG inside the button */
+  #scrollToTopBtn svg.arrow{
+    width:28px; height:28px;
+    display:block;
+    transform-origin:center;
+    transition: transform 0.32s ease;
+  }
+
+  /* Visible state: show + float + pulse + bounce composite */
+  #scrollToTopBtn.show{
+    opacity:1;
+    visibility:visible;
+    transform: translateY(0) scale(1);
+    animation:
+      floatY 3s ease-in-out infinite,
+      pulseGlow 2.4s ease-in-out infinite,
+      subtleBounce 3.6s ease-in-out infinite;
+  }
+
+  /* float up/down */
+  @keyframes floatY{
+    0%{ transform: translateY(0) scale(1); }
+    50%{ transform: translateY(-10px) scale(1.01); }
+    100%{ transform: translateY(0) scale(1); }
+  }
+
+  /* small bounce rhythm */
+  @keyframes subtleBounce{
+    0%{ transform: translateY(0) scale(1); }
+    35%{ transform: translateY(-7px) scale(1.04); }
+    60%{ transform: translateY(4px) scale(.98); }
+    100%{ transform: translateY(0) scale(1); }
+  }
+
+  /* pulsing neon shadow */
+  @keyframes pulseGlow{
+    0%{ box-shadow: 0 8px 20px rgba(0,255,200,0.14); }
+    50%{ box-shadow: 0 16px 38px rgba(0,170,255,0.22); }
+    100%{ box-shadow: 0 8px 20px rgba(0,255,200,0.14); }
+  }
+
+  /* hover / focus: strong rainbow glow and slight pop */
+  #scrollToTopBtn:hover,
+  #scrollToTopBtn:focus{
+    transform: scale(1.18);
+    box-shadow:
+      0 18px 48px rgba(0,255,200,0.65),
+      0 8px 120px rgba(0,160,255,0.45),
+      0 0 140px rgba(255, 80, 200, 0.35);
+    outline:none;
+  }
+
+  /* 3D press effect */
+  #scrollToTopBtn:active{
+    transform: scale(.86);
+    transition: transform 0.08s ease;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.45);
+  }
+
+  /* rotate the arrow slowly for micro-motion */
+  #scrollToTopBtn.show svg.arrow{ animation: arrowSpin 6s linear infinite; }
+  @keyframes arrowSpin{ 0%{ transform: rotate(0deg) } 100%{ transform: rotate(360deg) } }
+
+  /* accessibility focus ring */
+  #scrollToTopBtn:focus-visible{
+    box-shadow: 0 0 0 6px rgba(0,255,200,0.12), 0 12px 40px rgba(0,255,200,0.18);
+  }
+
+  /* respects prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    #scrollToTopBtn, .progress-ring__circle { animation: none !important; transition: none !important; }
+  }
+
+  /* small screens adapt */
+  @media (max-width:420px){
+    #scrollWrap{ right:14px; bottom:14px; width:74px; height:74px; }
+    .progress-ring{ width:74px; height:74px; transform:rotate(-90deg) scale(.9); }
+    #scrollToTopBtn{ width:58px; height:58px; }
+  }
+
+</style>
+</head>
+<body>
+
+
+
+<!-- =========================
+     Scroll / Progress UI
+     ========================= -->
+<div id="scrollWrap" aria-hidden="false">
+  <!-- SVG with gradient defined inline -->
+  <svg class="progress-ring" viewBox="0 0 80 80" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#00ffd5"/>
+        <stop offset="40%" stop-color="#00aaff"/>
+        <stop offset="70%" stop-color="#ff4dd2"/>
+      </linearGradient>
+    </defs>
+    <circle class="progress-ring__circle" cx="40" cy="40" r="34" />
+  </svg>
+
+  <!-- button with inline svg arrow (no external icons) -->
+  <button id="scrollToTopBtn" aria-label="Scroll to top" title="Scroll to top">
+    <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 4 L12 20 M5 11 L12 4 L19 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    </svg>
+  </button>
+</div>
+
+<script>
+/* Professional scroll-to-top with circular progress.
+   Self-contained: places event listeners after DOM ready.
+*/
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('scrollToTopBtn');
+  const circle = document.querySelector('.progress-ring__circle');
+  const wrap = document.getElementById('scrollWrap');
+
+  if (!btn || !circle) return;
+
+  // circle metrics (must match r in SVG)
+  const R = 34;
+  const circumference = 2 * Math.PI * R;
+  circle.style.strokeDasharray = `${circumference}`;
+  circle.style.strokeDashoffset = `${circumference}`;
+
+  // utility to update progress & visibility
+  function update() {
+    const docEl = document.documentElement;
+    const scrollTop = window.pageYOffset || docEl.scrollTop || document.body.scrollTop || 0;
+    const scrollHeight = Math.max(docEl.scrollHeight, document.body.scrollHeight);
+    const clientHeight = window.innerHeight || docEl.clientHeight || document.body.clientHeight;
+    const scrollable = Math.max(scrollHeight - clientHeight, 1);
+
+    const progress = Math.max(0, Math.min(1, scrollTop / scrollable));
+    const offset = circumference - (progress * circumference);
+    circle.style.strokeDashoffset = offset;
+
+    // show button after a threshold
+    if (scrollTop > 220) {
+      btn.classList.add('show');
+      wrap.setAttribute('aria-hidden','false');
+    } else {
+      btn.classList.remove('show');
+      wrap.setAttribute('aria-hidden','true');
+    }
+  }
+
+  // smooth scroll to top
+  function scrollToTop() {
+    // if supported, use smooth behavior
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // initial update and listeners
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    scrollToTop();
+    // small accessibility feedback
+    btn.blur();
+  });
+
+  // keyboard accessibility: Enter or Space triggers click
+  btn.addEventListener('keydown', (e) => {
+    if (e.code === 'Enter' || e.code === 'Space') {
+      e.preventDefault();
+      scrollToTop();
+    }
+  });
+
+  // respect reduced motion: if set, reduce animations
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    // disable CSS animations by adding style overrides
+    btn.style.animation = 'none';
+    circle.style.transition = 'none';
+  }
+});
+</script>
+
+</body>
+</html>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+</body>
+
+</html>
