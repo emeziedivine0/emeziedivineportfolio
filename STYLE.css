@@ -519,3 +519,68 @@ h4 {
   #whatsapp-btn { top:60px; right:12px; font-size:0.9rem; gap:6px; padding:8px 12px; }
 }
 
+/* ================== RESPONSIVENESS FIX ================== */
+
+/* General body adjustments */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Ensure images don’t overflow */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive container grids */
+.projects-grid, .featured-images, .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+/* Header and sections padding adjustment */
+header, section, footer {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+/* Scroll-to-top button visibility */
+#scrollTopBtn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: block;
+    z-index: 999;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    nav a {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+
+    .projects-grid, .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #scrollTopBtn {
+        right: 14px;
+        bottom: 14px;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .projects-grid, .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+
