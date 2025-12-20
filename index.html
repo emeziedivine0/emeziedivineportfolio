@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMEZIE DIVINE / WEB DEVELOPER</title>
+    <!-- ================== SEO Optimization ================== -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emezie Divine Portfolio | Web Developer</title>
+<meta name="description" content="Emezie Divine – Web Developer | Frontend & Backend | Crafting modern, responsive websites for clients.">
+<meta name="keywords" content="Emezie Divine, Web Developer, Portfolio, Frontend Developer, Backend Developer, Responsive Website">
+<meta name="author" content="Emezie Divine">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph for Social Sharing -->
+<meta property="og:title" content="Emezie Divine Portfolio | Web Developer">
+<meta property="og:description" content="Frontend & Backend Developer – Emezie Divine | Responsive Websites | Portfolio">
+<meta property="og:image" content="images/your-social-share-image.jpg">
+<meta property="og:url" content="https://emeziedivine0.github.io/emeziedivineportfolio/">
+<meta property="og:type" content="website">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="images/favicon.png">
+
     <link rel="stylesheet" href="STYLE.css">
 </head>
 
@@ -1127,6 +1146,30 @@ button:hover, a:hover {
 </head>
 <body>
 
+    <!-- ================== PRELOADER ================== -->
+<div id="preloader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#10131f;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:9999;color:#00ffd5;font-family:'Inter',sans-serif;">
+    <div style="font-size:2.5rem; font-weight:700;">Welcome to EmezieDivinePortfolio</div>
+    <div id="preloader-count" style="margin-top:20px; font-size:1.8rem;">0%</div>
+</div>
+
+<script>
+    // Preloader Count Animation
+    let count = 0;
+    const countEl = document.getElementById('preloader-count');
+    const preloader = document.getElementById('preloader');
+
+    const counter = setInterval(()=>{
+        count++;
+        countEl.textContent = count + '%';
+        if(count >= 100){
+            clearInterval(counter);
+            preloader.style.opacity = '0';
+            setTimeout(()=>preloader.style.display='none', 500);
+        }
+    }, 30); // adjust 30ms for slower/faster animation
+</script>
+
+
 <section id="skills">
   <h2>My Skills</h2>
   <p>These are my core coding skills. Each skill shows proficiency level as a circular progress meter.</p>
@@ -1840,5 +1883,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 </body>
+
 
 </html>
