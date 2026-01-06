@@ -240,4 +240,5 @@ footer .pulse {
 @media (max-width:768px) {
   .about-content { flex-direction: column; }
   .skills-container { flex-direction: column; }
+  header nav ul { flex-direction: column; gap: 15px; }
 }
