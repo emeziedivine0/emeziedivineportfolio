@@ -2,131 +2,163 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <!-- RESPONSIVE -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEO -->
-  <title>Emezie Divine | Professional Web Developer</title>
-  <meta name="description" content="Emezie Divine is a professional web developer creating modern, responsive, high-converting websites.">
-  <meta name="keywords" content="Emezie Divine, Web Developer, Portfolio, Frontend Developer">
-  <meta name="author" content="Emezie Divine">
-
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Emezie Divine Portfolio - Professional Web Developer showcasing responsive websites, skills, projects, and contact info.">
+  <meta name="keywords" content="Emezie Divine, Web Developer, Frontend, Backend, Portfolio, Responsive Design, SEO">
+  <title>Emezie Divine Portfolio</title>
+  <link rel="stylesheet" href="STYLE.css">
+  <link rel="icon" href="images/favicon.png">
 </head>
 <body>
 
-<!-- ========== LOADER ========== -->
+<!-- ================== LOADER 1-100 ================== -->
 <div id="loader">
   <div class="loader-content">
-    <h1>EmezieDivinePortfolio</h1>
-    <span id="count">0%</span>
+    <span id="count">1</span><span>/100</span>
+    <p>Welcome to Emezie Divine Portfolio</p>
   </div>
 </div>
 
-<!-- ========== HEADER ========== -->
-<header id="home">
-  <div class="logo">Emezie Divine</div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<!-- ================== HEADER ================== -->
+<header id="header">
+  <div class="container header-container">
+    <h1 class="logo">
+      <span class="logo-pulse"></span>
+      Emezie Divine
+    </h1>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About Me</a></li>
+        <li><a href="#skills" class="nav-link">My Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button id="theme-toggle">🌙</button>
+    </nav>
+  </div>
 </header>
 
-<!-- ========== HERO ========== -->
-<section class="hero">
-  <h1>We Create High-Converting Websites</h1>
-  <p>Modern • Responsive • Professional</p>
-</section>
-
-<!-- ========== ABOUT ========== -->
-<section id="about">
-  <h2>About Me</h2>
-  <p>
-    I am Emezie Divine, a professional web developer focused on building
-    clean, responsive, and conversion-driven websites for clients worldwide.
-  </p>
-</section>
-
-<!-- ========== SKILLS ========== -->
-<section id="skills">
-  <h2>My Skills</h2>
-  <div class="grid">
-    <div>HTML5</div>
-    <div>CSS3</div>
-    <div>JavaScript</div>
-    <div>Responsive Design</div>
-    <div>SEO Basics</div>
-    <div>UI/UX</div>
+<!-- ================== HERO ================== -->
+<section id="home" class="hero">
+  <div class="hero-content">
+    <h2>We create highly converting websites</h2>
+    <p>Clean, responsive, and modern web development solutions tailored for your business.</p>
   </div>
 </section>
 
-<!-- ========== PROJECTS ========== -->
-<section id="projects">
-  <h2>Featured Projects</h2>
-  <div class="grid">
-    <div class="card">Project One</div>
-    <div class="card">Project Two</div>
-    <div class="card">Project Three</div>
-    <div class="card">Project Four</div>
+<!-- ================== ABOUT ================== -->
+<section id="about" class="section about">
+  <div class="container about-container">
+    <h2>About Me</h2>
+    <div class="about-content">
+      <p>I am Emezie Divine, a professional web developer specializing in creating responsive, modern websites that convert visitors into clients.</p>
+      <img src="images/about.jpg" alt="Emezie Divine" class="about-img">
+    </div>
   </div>
 </section>
 
-<!-- ========== PERSONALITY ========== -->
-<section id="personality">
-  <h2>My Personality</h2>
-  <p>
-    Detail-oriented, creative, reliable, and client-focused.
-    I value communication, quality, and long-term results.
-  </p>
+<!-- ================== SKILLS ================== -->
+<section id="skills" class="section skills">
+  <div class="container">
+    <h2>My Skills</h2>
+    <ul class="skills-list">
+      <li>HTML5</li>
+      <li>CSS3</li>
+      <li>JavaScript</li>
+      <li>Responsive Design</li>
+      <li>SEO Basics</li>
+      <li>UI/UX</li>
+    </ul>
+  </div>
 </section>
 
-<!-- ========== CONTACT ========== -->
-<section id="contact">
-  <h2>Contact Me</h2>
-  <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-  <p>WhatsApp: <a href="https://wa.me/YOURNUMBER" target="_blank">Chat on WhatsApp</a></p>
+<!-- ================== FEATURED PROJECTS ================== -->
+<section id="projects" class="section projects">
+  <div class="container">
+    <h2>Featured Projects</h2>
+    <div class="projects-grid">
+      <div class="project-item"><img src="images/image10.jpg" alt="Project One"></div>
+      <div class="project-item"><img src="images/image11.jpg" alt="Project Two"></div>
+      <div class="project-item"><img src="images/image14.jpg" alt="Project Three"></div>
+      <div class="project-item"><img src="images/image15.jpg" alt="Project Four"></div>
+    </div>
+  </div>
 </section>
 
-<!-- ========== FOOTER ========== -->
+<!-- ================== PERSONALITY ================== -->
+<section id="personality" class="section personality">
+  <div class="container">
+    <h2>My Personality</h2>
+    <p>Detail-oriented, creative, reliable, and client-focused. I value communication, quality, and long-term results.</p>
+  </div>
+</section>
+
+<!-- ================== CONTACT ================== -->
+<section id="contact" class="section contact">
+  <div class="container">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+    <p>Phone: <a href="tel:+1234567890">+123 456 7890</a></p>
+    <p>WhatsApp: <a href="https://wa.me/YOURNUMBER" target="_blank">Message Me</a></p>
+
+    <!-- Optional Newsletter -->
+    <form class="newsletter">
+      <input type="email" placeholder="Your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- ================== FOOTER ================== -->
 <footer>
-  <p>© <span id="year"></span> Emezie Divine. All rights reserved.</p>
+  <div class="container footer-container">
+    <p>&copy; <span id="year"></span> Emezie Divine. All rights reserved.</p>
+  </div>
+  <a href="#top" id="scrollTop">⬆</a>
 </footer>
 
-<!-- ========== FLOATING BUTTONS ========== -->
-<a href="https://wa.me/YOURNUMBER" class="whatsapp-float">WhatsApp</a>
-<button id="topBtn">↑</button>
+<!-- ================== FLOATING WHATSAPP BUTTON ================== -->
+<a href="https://wa.me/YOURNUMBER" target="_blank" class="whatsapp-float">💬</a>
 
-<!-- ========== JAVASCRIPT ========== -->
 <script>
-/* LOADER */
-let i = 0;
-const loader = document.getElementById("loader");
-const count = document.getElementById("count");
+  // ================== LOADER ==================
+  let count = 1;
+  const countEl = document.getElementById('count');
+  const loader = document.getElementById('loader');
+  let loaderInterval = setInterval(() => {
+    count++;
+    countEl.textContent = count;
+    if(count >= 100){
+      clearInterval(loaderInterval);
+      loader.style.display = 'none';
+    }
+  }, 50); // slower animation
 
-const interval = setInterval(() => {
-  i++;
-  count.textContent = i + "%";
-  if (i === 100) {
-    clearInterval(interval);
-    loader.style.opacity = "0";
-    setTimeout(() => loader.style.display = "none", 700);
-  }
-}, 40);
+  // ================== YEAR ==================
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-/* YEAR */
-document.getElementById("year").textContent = new Date().getFullYear();
+  // ================== SCROLL TO TOP ==================
+  const scrollTopBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.style.display = window.scrollY > 200 ? 'block' : 'none';
+  });
+  scrollTopBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 
-/* SCROLL TO TOP */
-const topBtn = document.getElementById("topBtn");
-window.addEventListener("scroll", () => {
-  topBtn.style.display = window.scrollY > 300 ? "block" : "none";
-});
-topBtn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  // ================== DARK MODE ==================
+  const themeToggle = document.getElementById('theme-toggle');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  });
+
+  // ================== NEWSLETTER FORM ==================
+  const newsletter = document.querySelector('.newsletter');
+  newsletter?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thank you for subscribing!');
+    newsletter.reset();
+  });
 </script>
-
 </body>
 </html>
