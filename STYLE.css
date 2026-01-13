@@ -627,3 +627,220 @@ section {
     width: 100%;
   }
 }
+
+
+/* New updated codes  */
+
+/* Global Responsive Fix */
+
+* {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Fix all sections */
+
+section, header, footer {
+ width: 100%;
+ max-width: 100vw;
+}
+
+/* Fix all about section breaking layout */
+#about, .about, .about-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Images never overflow */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Header new always visible */
+nav, -nav-links, .menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Mobile header fix */
+@media (max-width: 768px) {
+  nav, .nav-links {
+    flex-direction: row;
+    gap: 12px;
+    justify-content: center;
+  }
+}
+
+/* scroll to top always visible */
+#scrollToTop, .scroll-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999;
+}
+
+
+
+/* skills bar fix */
+.skills-bar {
+  width: 100%;
+  background: #222;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.skills-fill {
+  height: 14px;
+  background: linear-gradient(90deg,#00f5ff,#0ff);
+}
+
+/* button looks professional */
+button, .btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+button:hover, .btn:hover {
+  transition: scale(1.05);
+}
+
+.progress-ring_circle {
+  fill: none;
+  stroke: #00ffd5;
+  stroke-width: 6;
+  stroke-dasharray: 339.292;
+  stroke-dashoffset: 339.292; 
+  transition: stroke-dashoffset 0.1s linear;
+  transform: rotate (-90deg);
+  transform-origin: 50% 50%;
+
+}
+
+/* PROFESSIONAAL RESPONSIVE NAV BAR  */
+
+nav {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* scrollbar hidden but swipeable */
+nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  padding: 12px 14px;
+  min-width: max-content;
+}
+
+.nav-links a {
+  color: #00ffd5;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 10px 14px;
+  background: transparent;
+  border-radius: 0;
+  transition: 0.3s ease;
+  white-space: nowrap;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: 0.3s ease;
+}
+.nav-links ahover::after {
+  width: 100%;
+}
+
+
+.nav-links a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #00ffd5;
+}
+
+/* FORCE ABOUT SECTION TO BE VISIBLE */
+
+#about,
+.about,
+.about-section {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  position: relative !important;
+  z-index: 2 !important;
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+/* FIX INVISIBLE ABOUT CONTENT */
+#about *,
+.about *,
+.about-section * {
+  opacity: 1 !important;
+  color: #ffffff !important;
+  visibility: visible !important;
+}
+
+/* KEEP ABOUT INSIDE THE SCREEN */
+#about,
+.about,
+.about-section {
+  width: 100% !important;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60% 20px;
+  box-sizing: border-box;
+}
+
+/* FIX INVISIBLE ABOUT SECTION */
+
+#about,
+.about,
+.about-section {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  position: relative !important;
+  z-index: 5 !important;
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+  animation: none !important;
+}
+
+/* MAKE SURE ALL TEXT AND IMAGES INSIDE ABOUT ARE VISIBLE  */
+#about *,
+.about *,
+.about-section * {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
