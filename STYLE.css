@@ -844,3 +844,13 @@ nav::-webkit-scrollbar {
   opacity: 1 !important;
   visibility: visible !important;
 }
+
+/* FORCE ABOUT SECTION TO BE VISIBLE */
+#about,
+.about,
+.about-section {
+  opacity: !important;
+  transform: none !important;
+  visibility: visible !important;
+  display: block !important;
+}
