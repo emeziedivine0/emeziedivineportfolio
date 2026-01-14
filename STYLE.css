@@ -877,3 +877,58 @@ main, section, #about, .about, .about-section {
   width: 100%;
   padding: 60px 20px;
 }
+
+
+
+/* NEW ABOUT ARRANGMENT */
+
+/* =========================
+   FORCE ABOUT SECTION VISIBLE & FIX LAYOUT
+   ========================= */
+#about, .about-section {
+  display: flex !important;          /* Flex layout for image + text */
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: 40px !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 60px auto !important;     /* Top & bottom spacing */
+  padding: 40px 20px !important;    /* Reasonable padding */
+  position: relative !important;
+  z-index: 10 !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#about > *, .about-section > * {
+  flex: 1 1 300px !important;        /* Responsive flex items */
+  max-width: 600px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: #000 !important;            /* Make text visible on light bg */
+}
+
+/* About image adjustments */
+.about-image {
+  flex: 1 1 300px !important;
+  max-width: 400px !important;
+  height: auto !important;
+  border-radius: 10px !important;
+}
+
+/* About text adjustments */
+.about-text {
+  flex: 1 1 400px !important;
+  font-size: 18px !important;
+  line-height: 1.6 !important;
+  max-width: 600px !important;
+}
+
+/* Ensure images never overflow */
+#about img, .about-section img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
