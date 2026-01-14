@@ -854,3 +854,26 @@ nav::-webkit-scrollbar {
   visibility: visible !important;
   display: block !important;
 }
+
+/* FIX: RESTORE NORMAL PAGE FLOW SO ABOUT SECTION CAN APPEAR  */
+
+html, body {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  height: auto !important;
+}
+
+main, section, #about, .about, .about-section {
+  position: relative !important;
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+/* MAKE SURE ABOUT SECTION CAN EXPAND  */
+
+#about {
+  display: block !important;
+  width: 100%;
+  padding: 60px 20px;
+}
