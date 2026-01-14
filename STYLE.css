@@ -1163,16 +1163,6 @@ html, body {
   height: 100px;
 }
 
-/* =========================
-   CLEAN ABOUT SECTION FIX
-   ========================= */
-#about { ... } 
-#about .about-section { ... }
-...
-html, body {
-  overflow-x: hidden;
-  max-width: 100%;
-}
 
 
 
