@@ -1017,3 +1017,71 @@ main, section, #about, .about, .about-section {
     text-align: center !important;
   }
 }
+/* =========================
+   ABOUT SECTION – FULL WIDTH FIX (PROFESSIONAL)
+   ========================= */
+
+/* Make #about a real full-width section */
+#about {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 120px 0 !important;
+  background: linear-gradient(135deg, #081a1f, #020d11) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Inner centered container */
+#about .about-section {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 48px !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Image column */
+#about .about-image {
+  flex: 1 1 380px !important;
+  max-width: 420px !important;
+}
+
+/* Image */
+#about .about-image img {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 14px !important;
+  display: block !important;
+}
+
+/* Text column */
+#about .about-text {
+  flex: 1 1 450px !important;
+  max-width: 600px !important;
+  color: #e6ffff !important;
+}
+
+/* Text styling */
+#about h2, 
+#about h3 {
+  color: #00ffd5 !important;
+  margin-bottom: 16px !important;
+}
+
+#about p {
+  color: #c9fdf7 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.8 !important;
+}
+
+/* Mobile stack */
+@media (max-width: 900px) {
+  #about .about-section {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+}
