@@ -1085,3 +1085,59 @@ main, section, #about, .about, .about-section {
     text-align: center !important;
   }
 }
+
+/* =========================
+   UNLOCK ABOUT SECTION FROM PARENT CLIPPING
+   ========================= */
+#about {
+  position: relative !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+
+body, main, section {
+  overflow: visible !important;
+  height: auto !important;
+}
+
+/* Kill any container that clips About */
+#about, 
+#about * {
+  clip-path: none !important;
+  mask: none !important;
+}
+
+/* =========================
+   REAL FULL WIDTH BACKGROUND
+   ========================= */
+#about {
+  width: 100vw !important;
+  min-height: 100vh !important;
+  margin-left: 50% !important;
+  transform: translateX(-50%) !important;
+  background: linear-gradient(135deg, #071a1f, #020e12) !important;
+  padding: 120px 0 !important;
+  display: block !important;
+  z-index: 5 !important;
+}
+
+#about .about-section {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 48px !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Columns */
+#about .about-image {
+  flex: 1 1 380px !important;
+}
+
+#about .about-text {
+  flex: 1 1 450px !important;
+  color: #dffffa !important;
+}
