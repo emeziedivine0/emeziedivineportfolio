@@ -1142,3 +1142,24 @@ body, main, section {
   color: #dffffa !important;
 }
 
+/* =========================
+   KILL HORIZONTAL SCROLL (GLOBAL)
+   ========================= */
+html, body {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* Remove all viewport hacks */
+#about {
+  width: 100% !important;
+  margin-left: 0 !important;
+  transform: none !important;
+}
+
+/* Ensure no element can push outside screen */
+* {
+  max-width: 100vw !important;
+  box-sizing: border-box !important;
+}
