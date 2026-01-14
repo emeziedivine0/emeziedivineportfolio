@@ -1107,3 +1107,70 @@ body, main, section {
   mask: none !important;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ====== FIX ABOUT LAYOUT & OVERFLOW ====== */
+#about {
+  width: 100%;
+  overflow: hidden;
+}
+
+#about .about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 48px;
+  align-items: center;
+}
+
+/* Prevent SVGs, circles & images from breaking width */
+#about img,
+#about svg,
+#about .circle-skill,
+#about .counter-item {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* ===== MOBILE STACK (like Projects & Skills) ===== */
+@media (max-width: 900px) {
+  #about .about-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  #about .about-text {
+    text-align: center;
+  }
+
+  #about .skills-circles,
+  #about .counters {
+    justify-content: center;
+  }
+}
+
+.circle-skill {
+  width: 100px;
+  max-width: 100%;
+}
+
+.circle-skill svg {
+  width: 100px;
+  height: 100px;
+}
+
+/* =========================
+   CLEAN ABOUT SECTION FIX
+   ========================= */
+#about { ... } 
+#about .about-section { ... }
+...
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
