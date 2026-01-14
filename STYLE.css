@@ -1345,6 +1345,145 @@ html, body {
   max-width: 100%;
 }
 
+/* =========================
+   FIX ABOUT SECTION RESPONSIVE & FLOW
+   ========================= */
+#about {
+  width: 100%;
+  padding: 100px 24px;
+  background: linear-gradient(180deg,#0b0e14 0%,#10131f 100%);
+  color: #cfeee8;
+  overflow: hidden; /* prevent horizontal scroll */
+  box-sizing: border-box;
+}
+
+#about .about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+#about .about-image {
+  text-align: center;
+}
+
+#about .about-image img {
+  border-radius: 20px;
+  max-width: 100%;
+  box-shadow: 0 12px 36px rgba(0,255,200,0.2);
+  transition: transform 0.35s ease;
+}
+
+#about .about-image img:hover {
+  transform: scale(1.05);
+}
+
+#about .about-text {
+  text-align: left;
+}
+
+#about .about-text h2.animated-title {
+  font-size: 2.6rem;
+  color: #00ffd5;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+
+#about .about-text p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #9eeadf;
+  margin-bottom: 16px;
+}
+
+#about .counters {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+#about .counters .counter-item h3 {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+#about .skills-circles {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  justify-content: flex-start;
+}
+
+#about .skills-circles .circle-skill svg {
+  width: 100px;
+  height: 100px;
+}
+
+/* Call to Action button */
+#about .about-text a {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 16px;
+  background: linear-gradient(90deg,#00ffd5,#00aaff);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.35s;
+}
+
+#about .about-text a:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 36px rgba(0,255,200,0.25);
+}
+
+/* =========================
+   RESPONSIVE FIXES
+   ========================= */
+@media (max-width: 1024px) {
+  #about .about-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 900px) {
+  #about .about-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  #about .about-text {
+    text-align: center;
+  }
+
+  #about .skills-circles,
+  #about .counters {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  #about .about-text h2.animated-title {
+    font-size: 2rem;
+  }
+
+  #about .about-text p {
+    font-size: 1rem;
+  }
+
+  #about .skills-circles .circle-skill svg {
+    width: 80px;
+    height: 80px;
+  }
+}
+
 
 
 
