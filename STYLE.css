@@ -1225,5 +1225,28 @@ img, .main-image, .slideshow, svg, .circle-skill {
     }
 }
 
+/* =========================
+   PRO FULL-PAGE HORIZONTAL SCROLL FIX
+   ========================= */
+
+/* Prevent horizontal scroll globally, except for the nav */
+body, html, main, section, #about, .about-section, .slideshow, .main-image, .container {
+    max-width: 100%;
+    overflow-x: hidden; /* Stops horizontal scroll everywhere */
+    box-sizing: border-box;
+}
+
+/* Allow nav bar to scroll horizontally if needed */
+nav {
+    overflow-x: auto;   /* keeps your nav scrollable */
+    white-space: nowrap; /* prevents nav links from wrapping */
+}
+
+/* Optional: hide nav scrollbar but keep scrollable */
+nav::-webkit-scrollbar {
+    display: none;
+}
+
+
 
 
